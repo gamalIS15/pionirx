@@ -1,7 +1,16 @@
 package main
 
-import "fmt"
+import (
+	"pionirx/config"
+	"pionirx/db"
+	"pionirx/routes"
+)
 
 func main() {
-	fmt.Println("Hello World")
+	cfg := config.Init()
+	db.Init()
+
+	e := routes.Init()
+	e.Logger.Fatal(e.Start(cfg.Hostname + ":" + cfg.HostnamePort))
+
 }
